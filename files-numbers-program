@@ -1,0 +1,76 @@
+
+def main():
+
+    flag=True
+    while flag:
+
+        try:
+            lista_numrave=[]
+            file1="numrat"
+            file2="zene"
+            with open(file1, "r") as file:
+                for line in file:
+                    lista_numrave.append(int(line.rstrip("\n")))
+
+            option=int(input("Shtyp 1 per te hequr nje numer"
+                             "\nShtyp 2 per te treguar numrat qe ke hequr"
+                             "\nShtyp 3 per te treguar numrat qe jane akoma ne dispozicion (te gjithe)"
+                             "\nShtyp 4 per te treguar nese numri eshte  disponibel"
+                             "\nShtyp 5 nese do te shikosh madhesine e listes: "
+                             "\nShtyp 0 per te dale nga programi"))
+
+            if option==1:
+                number_delete=int(input("Cilin numer do te heqesh (1~150): "))
+
+                with open(file2,"a") as file_dy:
+                        try:
+                            for i in lista_numrave:
+                                if i==number_delete:
+                                    file_dy.write(str(i)+"\n")
+                                    lista_numrave.remove(i)
+                                    print("Numri u fshi !")
+                        except:
+                            print("Ka error ne input")
+                        finally:
+                            file_dy.close()
+
+                with open(file1, "w")as file:
+                    for i in lista_numrave:
+                        file.write(str(i)+"\n")
+                    file.close()
+
+
+            elif option==3:
+                print(lista_numrave)
+
+
+            elif option==2:
+
+                with open(file2, "r") as file_dy:
+                    for line in file_dy:
+                        print(line.rstrip("\n"))
+
+
+            elif option==4:
+                numri_check=int(input("Cilin numer do te kontrrollosh: "))
+                if numri_check in lista_numrave:
+                    print("Po , eshte disponibel")
+                else:
+                    print("Jo , nuk eshte disponibel")
+
+            elif option==0: 
+                print("Mirupafshim")
+                flag=False
+
+            elif option==5:
+                print("Lista ka ne dispozicion ", len(lista_numrave), "numra")
+
+            else:
+                print("Vendos nje numer midis 0~4 per te perdorur opsionet")
+
+        except ValueError:
+            print("Vendos nje numer te lutem !")
+
+        print("\n")
+
+main()
